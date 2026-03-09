@@ -23,7 +23,7 @@ export default function Navbar() {
         animate={{ y: 0 }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         className={cn(
-          'fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 md:px-12 transition-colors duration-500',
+          'fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-6 md:px-12 md:py-8 transition-colors duration-500',
           isScrolled ? 'bg-accent/90 backdrop-blur-md text-text' : 'bg-transparent text-text'
         )}
       >
@@ -69,16 +69,11 @@ export default function Navbar() {
           <motion.button 
             onClick={() => setIsContactOpen(true)}
             initial="initial"
-            animate="animate"
             whileHover="hover"
             whileTap="tap"
             className="hidden md:flex items-center justify-center relative overflow-hidden text-xs tracking-[0.2em] uppercase font-medium bg-primary text-white px-8 py-3 rounded-full"
             variants={{
               initial: { scale: 1, boxShadow: '0px 4px 15px rgba(195,131,58,0.4)' },
-              animate: { 
-                boxShadow: ['0px 4px 15px rgba(195,131,58,0.4)', '0px 4px 25px rgba(195,131,58,0.7)', '0px 4px 15px rgba(195,131,58,0.4)'],
-                transition: { duration: 2, repeat: Infinity, ease: "easeInOut" }
-              },
               hover: { scale: 1.05, boxShadow: '0px 4px 30px rgba(195,131,58,0.8)' },
               tap: { scale: 0.95 }
             }}
