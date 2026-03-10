@@ -1,12 +1,33 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Heart, Menu, X } from 'lucide-react';
+import { Heart, Menu, X, ChevronDown } from 'lucide-react';
 import { cn } from '../lib/utils';
+
+const menuItems = [
+  { name: 'Home', href: '#home' },
+  { 
+    name: 'About Us', 
+    href: '#about-us',
+    dropdown: ['Our Story', 'Spa Gallery', 'Policies']
+  },
+  { 
+    name: 'Our Offerings', 
+    href: '#treatments',
+    dropdown: ['Massages & Reflexology', 'Body Scrubs & Treatments', 'Le Nail Salon', 'Wellness Suites & Packages', 'Memberships & Gatherings']
+  },
+  { 
+    name: 'Sabasu', 
+    href: '#gallery',
+    dropdown: ['Ramyeon Noodle Bar', 'Coffee, Tea & Refreshments', 'Hearty Meals', 'Light Bites & Sweets']
+  },
+  { name: 'Contact', href: '#contact' }
+];
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isContactOpen, setIsContactOpen] = useState(false);
+  const [expandedMenu, setExpandedMenu] = useState<string | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,6 +36,10 @@ export default function Navbar() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const toggleDropdown = (name: string) => {
+    setExpandedMenu(expandedMenu === name ? null : name);
+  };
 
   return (
     <>
@@ -126,26 +151,66 @@ export default function Navbar() {
               </div>
               
               <div className="flex-1 flex flex-col px-6 py-12 gap-6 text-2xl font-serif overflow-y-auto">
-                {['Home', 'About Us', 'Treatments', 'Gallery', 'Contact'].map((item, i) => (
-                  <motion.a
-                    key={item}
-                    href={item === 'Contact' ? '#' : `#${item.toLowerCase().replace(' ', '-')}`}
-                    onClick={(e) => {
-                      if (item === 'Contact') {
-                        e.preventDefault();
-                        setIsMenuOpen(false);
-                        setIsContactOpen(true);
-                      } else {
-                        setIsMenuOpen(false);
-                      }
-                    }}
+                {menuItems.map((item, i) => (
+                  <motion.div
+                    key={item.name}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: i * 0.1 + 0.2, duration: 0.5 }}
-                    className="hover:text-primary transition-colors"
+                    className="flex flex-col"
                   >
-                    {item}
-                  </motion.a>
+                    <div className="flex items-center justify-between">
+                      <a
+                        href={item.name === 'Contact' ? '#' : item.href}
+                        onClick={(e) => {
+                          if (item.dropdown) {
+                            e.preventDefault();
+                            toggleDropdown(item.name);
+                          } else if (item.name === 'Contact') {
+                            e.preventDefault();
+                            setIsMenuOpen(false);
+                            setIsContactOpen(true);
+                          } else {
+                            setIsMenuOpen(false);
+                          }
+                        }}
+                        className="hover:text-primary transition-colors flex items-center gap-2"
+                      >
+                        {item.name}
+                        {item.dropdown && (
+                          <motion.div
+                            animate={{ rotate: expandedMenu === item.name ? 180 : 0 }}
+                            transition={{ duration: 0.3 }}
+                          >
+                            <ChevronDown size={20} className="text-primary/70" />
+                          </motion.div>
+                        )}
+                      </a>
+                    </div>
+                    
+                    <AnimatePresence>
+                      {item.dropdown && expandedMenu === item.name && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.3 }}
+                          className="overflow-hidden flex flex-col gap-3 mt-4 pl-4 border-l border-primary/30"
+                        >
+                          {item.dropdown.map((subItem) => (
+                            <a
+                              key={subItem}
+                              href={`#${subItem.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}
+                              onClick={() => setIsMenuOpen(false)}
+                              className="text-base font-sans tracking-wide text-white/70 hover:text-primary transition-colors"
+                            >
+                              {subItem}
+                            </a>
+                          ))}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </motion.div>
                 ))}
               </div>
             </motion.div>

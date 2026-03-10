@@ -4,35 +4,51 @@ import { motion, useScroll, useTransform } from 'motion/react';
 const treatments = [
   {
     id: 1,
-    title: "Signature Massage",
-    image: "https://picsum.photos/seed/massage/1200/800",
-    description: "A blend of Swedish and deep tissue techniques to melt away tension.",
-    price: "$150",
-    duration: "60 min"
+    title: "Sabbath Signature Massage",
+    image: "https://picsum.photos/seed/sabbath-massage/1200/800",
+    description: "Our bespoke massage blending Eastern and Western techniques for ultimate relaxation.",
+    price: "Signature",
+    duration: "90 min"
   },
   {
     id: 2,
-    title: "Radiance Facial",
-    image: "https://picsum.photos/seed/facial/1200/800",
-    description: "Revitalize your skin with our organic, nutrient-rich botanical facial.",
-    price: "$180",
-    duration: "75 min"
+    title: "Swedish Massage",
+    image: "https://picsum.photos/seed/swedish-massage/1200/800",
+    description: "A classic full-body massage using gentle, flowing strokes to improve circulation.",
+    price: "Classic",
+    duration: "60 min"
   },
   {
     id: 3,
-    title: "Hydrotherapy Soak",
-    image: "https://picsum.photos/seed/hydro/1200/800",
-    description: "Immerse yourself in mineral-rich waters to soothe muscles and joints.",
-    price: "$90",
-    duration: "45 min"
+    title: "Shiatsu Massage",
+    image: "https://picsum.photos/seed/shiatsu-massage/1200/800",
+    description: "Traditional Japanese acupressure to restore energy flow and relieve tension.",
+    price: "Therapeutic",
+    duration: "60 min"
   },
   {
     id: 4,
-    title: "Aromatherapy Wrap",
-    image: "https://picsum.photos/seed/wrap/1200/800",
-    description: "A full-body cocoon of essential oils to detoxify and hydrate.",
-    price: "$120",
-    duration: "60 min"
+    title: "Sabbath Signature Foot Reflexology",
+    image: "https://picsum.photos/seed/foot-reflexology/1200/800",
+    description: "Targeted pressure point therapy to stimulate healing and deep relaxation.",
+    price: "Targeted",
+    duration: "45 min"
+  },
+  {
+    id: 5,
+    title: "Le Nail Salon",
+    image: "https://picsum.photos/seed/nail-salon/1200/800",
+    description: "Premium nail care, manicures, and pedicures in a luxurious setting.",
+    price: "Premium",
+    duration: "Varies"
+  },
+  {
+    id: 6,
+    title: "Sabasu",
+    image: "https://picsum.photos/seed/sabasu-food/1200/800",
+    description: "Delight in our Ramyeon Noodle Bar, hearty meals, and refreshing beverages.",
+    price: "A la carte",
+    duration: "Dine-in"
   }
 ];
 
@@ -42,13 +58,13 @@ export default function Treatments() {
     target: targetRef,
   });
 
-  // We have 4 items. We want to scroll horizontally by -75% so the 4th item is visible at the end.
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-75%"]);
+  // We have 6 items. We want to scroll horizontally by -83.3333% so the 6th item is visible at the end.
+  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-83.3333%"]);
 
   return (
-    <section id="treatments" ref={targetRef} className="relative h-[400vh] bg-accent text-text">
+    <section id="treatments" ref={targetRef} className="relative h-[600vh] bg-accent text-text">
       <div className="sticky top-0 h-screen flex items-center overflow-hidden">
-        <motion.div style={{ x }} className="flex w-[400vw] h-full">
+        <motion.div style={{ x }} className="flex w-[600vw] h-full">
           {treatments.map((treatment) => (
             <div key={treatment.id} className="w-[100vw] h-full flex items-center justify-center p-6 md:p-24 relative">
               

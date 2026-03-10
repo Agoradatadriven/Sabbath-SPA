@@ -56,18 +56,18 @@ export default function Booking() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-lg font-light leading-relaxed max-w-md text-text/80 mb-12"
           >
-            Select your preferred treatment and time. Our concierge will confirm your reservation shortly via email.
+            Select your preferred offering and time. Our team will gladly confirm your reservation shortly via email.
           </motion.p>
 
           <div className="flex flex-col gap-6 text-sm tracking-widest uppercase font-medium">
             <div className="flex flex-col gap-2">
               <span className="text-primary">Location</span>
-              <span>123 Wellness Blvd, Serenity City</span>
+              <span className="leading-relaxed">L 3330-B Governor Padilla Road,<br/>Satisima Trinidad, Malolos Bulacan</span>
             </div>
             <div className="flex flex-col gap-2">
               <span className="text-primary">Contact</span>
-              <span>hello@sabbathspa.com</span>
-              <span>+1 (555) 123-4567</span>
+              <span className="lowercase normal-case">sabbathwellnesshub@gmail.com</span>
+              <span>0917 199 7772</span>
             </div>
           </div>
         </div>
@@ -106,16 +106,18 @@ export default function Booking() {
             </div>
 
             <div className="flex flex-col gap-2">
-              <label htmlFor="treatment" className="text-xs uppercase tracking-widest font-medium text-text/70">Treatment</label>
+              <label htmlFor="treatment" className="text-xs uppercase tracking-widest font-medium text-text/70">Offering</label>
               <select 
-                {...register("treatment", { required: "Please select a treatment" })}
+                {...register("treatment", { required: "Please select an offering" })}
                 className="border-b border-white/20 bg-transparent py-3 focus:outline-none focus:border-primary transition-colors appearance-none text-text [&>option]:bg-accent"
               >
-                <option value="">Select a treatment</option>
-                <option value="Signature Massage">Signature Massage</option>
-                <option value="Radiance Facial">Radiance Facial</option>
-                <option value="Hydrotherapy Soak">Hydrotherapy Soak</option>
-                <option value="Aromatherapy Wrap">Aromatherapy Wrap</option>
+                <option value="">Select an offering</option>
+                <option value="Sabbath Signature Massage">Sabbath Signature Massage</option>
+                <option value="Swedish Massage">Swedish Massage</option>
+                <option value="Shiatsu Massage">Shiatsu Massage</option>
+                <option value="Sabbath Signature Foot Reflexology">Sabbath Signature Foot Reflexology</option>
+                <option value="Le Nail Salon">Le Nail Salon</option>
+                <option value="Sabasu">Sabasu</option>
               </select>
               {errors.treatment && <span className="text-red-500 text-xs">{errors.treatment.message}</span>}
             </div>
